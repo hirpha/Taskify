@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class TaskCategoryWidget extends StatelessWidget {
   @override
@@ -6,44 +7,291 @@ class TaskCategoryWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'UNIQLO Workspace',
-                  style: TextStyle(fontSize: 16, color: Colors.white),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  // alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'UNIQLO Workspace',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            height: 20,
+                            padding: const EdgeInsets.all(5),
+                            decoration: const BoxDecoration(
+                                color: Colors.black, shape: BoxShape.circle),
+                            child: const Icon(
+                              Icons.check,
+                              size: 10,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          const Flexible(
+                            child: Text(
+                              'Meeting with UNIQLO',
+                              softWrap: true,
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            height: 20,
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.black, width: 2),
+                                color: Colors.white,
+                                shape: BoxShape.circle),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          const Flexible(
+                            child: Text(
+                              'Meeting with UNIQLO',
+                              softWrap: true,
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-                Text(
-                  'Meeting with UNIQLO',
-                  style: TextStyle(color: Colors.grey),
+                const SizedBox(
+                  height: 10,
                 ),
-                Text(
-                  'Daily Report',
-                  style: TextStyle(color: Colors.grey),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: const Color.fromARGB(255, 154, 154, 154)
+                          .withOpacity(.5)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Column(
+                        children: [
+                          Text(
+                            "Daily Task",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            "8/10 done ",
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                      CircularPercentIndicator(
+                        radius: 25.0,
+                        lineWidth: 5.0,
+                        animation: true,
+                        percent: 0.7,
+                        center: const Text(
+                          "70.0%",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 10.0),
+                        ),
+                        circularStrokeCap: CircularStrokeCap.round,
+                        progressColor: Colors.white,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Shared Workspace',
-                  style: TextStyle(fontSize: 16, color: Colors.white),
-                ),
-                Text(
-                  'POS Foodie Workspace',
-                  style: TextStyle(color: Colors.grey),
-                ),
-                Text(
-                  'UNIQLO Workspace',
-                  style: TextStyle(color: Colors.grey),
-                ),
-              ],
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              // alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 231, 77, 12),
+                  borderRadius: BorderRadius.circular(20)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'UNIQLO Workspace',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 255, 255, 255)),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        height: 20,
+                        padding: const EdgeInsets.all(5),
+                        decoration: const BoxDecoration(
+                            color: Color.fromARGB(255, 255, 254, 254),
+                            shape: BoxShape.circle),
+                        child: const Icon(
+                          Icons.check,
+                          size: 10,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      const Flexible(
+                        child: Text(
+                          'Meeting with UNIQLO',
+                          softWrap: true,
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        height: 20,
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                                color: const Color.fromARGB(255, 255, 255, 255),
+                                width: 2),
+                            color: const Color.fromARGB(0, 255, 255, 255),
+                            shape: BoxShape.circle),
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      const Flexible(
+                        child: Text(
+                          'Meeting with UNIQLO',
+                          softWrap: true,
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text(
+                    'UNIQLO Workspace',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 255, 255, 255)),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        height: 20,
+                        padding: const EdgeInsets.all(5),
+                        decoration: const BoxDecoration(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            shape: BoxShape.circle),
+                        child: const Icon(
+                          Icons.check,
+                          size: 10,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      const Flexible(
+                        child: Text(
+                          'Meeting with UNIQLO',
+                          softWrap: true,
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        height: 20,
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                                color: const Color.fromARGB(255, 255, 255, 255),
+                                width: 2),
+                            color: const Color.fromARGB(0, 255, 255, 255),
+                            shape: BoxShape.circle),
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      const Flexible(
+                        child: Text(
+                          'Meeting with UNIQLO',
+                          softWrap: true,
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ],

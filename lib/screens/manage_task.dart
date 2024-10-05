@@ -9,7 +9,7 @@ class ManageTaskPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Manage Task'),
+        title: const Text('Manage Task'),
         centerTitle: true,
         backgroundColor: Colors.black,
       ),
@@ -18,8 +18,8 @@ class ManageTaskPage extends StatelessWidget {
           // Date selector at the top
           TimelineWidget(),
           // Timeline label
-          Padding(
-            padding: const EdgeInsets.only(left: 20.0),
+          const Padding(
+            padding: EdgeInsets.only(left: 20.0),
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -86,8 +86,8 @@ class ManageTaskPage extends StatelessWidget {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => NewTask()));
         },
-        label: Text('Create New Task'),
-        icon: Icon(Icons.add),
+        label: const Text('Create New Task'),
+        icon: const Icon(Icons.add),
         backgroundColor: Colors.orange,
       ),
     );
@@ -107,7 +107,7 @@ class ManageTaskPage extends StatelessWidget {
               children: [
                 Text(
                   '${10 + index}:00',
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
                 Expanded(
                   child: CustomPaint(painter: DottedLinePainter()),
@@ -130,7 +130,7 @@ class ManageTaskPage extends StatelessWidget {
   }) {
     return Container(
       width: 290,
-      padding: EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         color: Colors.black,
         borderRadius: BorderRadius.circular(10.0),
@@ -142,21 +142,21 @@ class ManageTaskPage extends StatelessWidget {
             backgroundImage: NetworkImage(avatarUrl),
             radius: 20.0,
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 title,
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
               ),
               Text(
                 duration,
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
               ),
               Text(
                 schedule,
-                style: TextStyle(color: Colors.grey),
+                style: const TextStyle(color: Colors.grey),
               ),
             ],
           ),
