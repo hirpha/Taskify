@@ -10,7 +10,7 @@ class TaskManagerHome extends StatefulWidget {
 class _TaskManagerHomeState extends State<TaskManagerHome> {
   int _selectedIndex = 0;
 
-  List<Widget> _pages = [
+  final List<Widget> _pages = [
     TaskOverviewScreen(),
     ManageTaskPage(), // This is the page you'll link to the calendar
     ManageTaskPage(), // This is the page you'll link to the calendar
