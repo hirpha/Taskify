@@ -5,28 +5,101 @@ import '../shared/task_timeline_widget.dart';
 import 'new_task.dart';
 
 class ManageTaskPage extends StatelessWidget {
+  static const routeName = "ManageTaskPage";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Manage Task'),
+        backgroundColor: Colors.transparent,
+        leadingWidth: MediaQuery.of(context).size.width * .2,
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Container(
+              margin: const EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.all(3),
+              decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Color.fromARGB(182, 255, 255, 255)),
+              child: const CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: Icon(
+                    Icons.arrow_back_ios_new,
+                    color: Colors.black,
+                  ))),
+        ),
         centerTitle: true,
-        backgroundColor: Colors.black,
+        title: const Text('Manage Task',
+            style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 18,
+                fontWeight: FontWeight.bold)),
+        actions: [
+          Container(
+            padding: const EdgeInsets.all(7),
+            decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color.fromARGB(117, 249, 249, 249)),
+            child: Container(
+              padding: const EdgeInsets.all(3),
+              decoration: const BoxDecoration(
+                  shape: BoxShape.circle, color: Colors.white),
+              child: IconButton(
+                icon:
+                    const Icon(Icons.menu, color: Color.fromARGB(255, 0, 0, 0)),
+                onPressed: () {},
+              ),
+            ),
+          ),
+        ],
       ),
+      // appBar: AppBar(
+      //   title: const Text('Manage Task'),
+      //   centerTitle: true,
+      //   backgroundColor: Colors.black,
+      // ),
       body: Column(
         children: [
           // Date selector at the top
-          TimelineWidget(),
-          // Timeline label
+          SizedBox(
+            height: 20,
+          ),
           const Padding(
             padding: EdgeInsets.only(left: 20.0),
             child: Align(
               alignment: Alignment.centerLeft,
-              child: Text(
-                'Timeline',
-                style: TextStyle(fontSize: 20, color: Colors.white),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        '04 June 2023',
+                        style: TextStyle(
+                            fontSize: 24,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Icon(Icons.arrow_drop_down)
+                    ],
+                  ),
+                  Text(
+                    'You have total 4 tasks',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Color.fromARGB(255, 158, 158, 158),
+                    ),
+                  ),
+                ],
               ),
             ),
+          ),
+          TimelineWidget(),
+          // Timeline label
+
+          SizedBox(
+            height: 10,
           ),
           // Task timeline section
 
@@ -36,6 +109,7 @@ class ManageTaskPage extends StatelessWidget {
               child: Stack(
                 children: [
                   // _buildTimeline(),
+
                   _buildTask(),
                 ],
               ),
@@ -74,7 +148,7 @@ class ManageTaskPage extends StatelessWidget {
                 //   style: const TextStyle(color: Colors.white),
                 // ),
 
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Expanded(

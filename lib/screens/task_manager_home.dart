@@ -13,14 +13,18 @@ class _TaskManagerHomeState extends State<TaskManagerHome> {
   final List<Widget> _pages = [
     TaskOverviewScreen(),
     ManageTaskPage(), // This is the page you'll link to the calendar
-    ManageTaskPage(), // This is the page you'll link to the calendar
+    TaskOverviewScreen(), // This is the page you'll link to the calendar
     // Add other pages here
   ];
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    if (index == 1) {
+      Navigator.pushNamed(context, ManageTaskPage.routeName);
+    } else {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
   }
 
   @override
