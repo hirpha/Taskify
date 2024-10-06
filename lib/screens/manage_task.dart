@@ -35,44 +35,8 @@ class ManageTaskPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Stack(
                 children: [
-                  _buildTimeline(),
-                  // Tasks positioned on the timeline
-                  Positioned(
-                    top: 60, // Position based on 12:00 PM
-                    left: 120,
-                    child: _buildTaskCard(
-                      title: "POS Foodie Workspace",
-                      avatarUrl:
-                          'https://via.placeholder.com/150', // Replace with the actual URL
-                      duration: "00:48 h of 5 h",
-                      schedule: "4-5 June",
-                      color: Colors.purple,
-                    ),
-                  ),
-                  Positioned(
-                    top: 180, // Position based on 14:00 PM
-                    left: 80,
-                    child: _buildTaskCard(
-                      title: "Landing page for TRIPPIES",
-                      avatarUrl:
-                          'https://via.placeholder.com/150', // Replace with the actual URL
-                      duration: "00:48 h of 5 h",
-                      schedule: "4-5 June",
-                      color: Colors.green,
-                    ),
-                  ),
-                  Positioned(
-                    top: 300, // Position based on 16:00 PM
-                    left: 60,
-                    child: _buildTaskCard(
-                      title: "UNIQLO Workspace",
-                      avatarUrl:
-                          'https://via.placeholder.com/150', // Replace with the actual URL
-                      duration: "00:48 h of 5 h",
-                      schedule: "2-14 June",
-                      color: Colors.green,
-                    ),
-                  ),
+                  // _buildTimeline(),
+                  _buildTask(),
                 ],
               ),
             ),
@@ -97,17 +61,21 @@ class ManageTaskPage extends StatelessWidget {
   Widget _buildTimeline() {
     return Container(
       height: double.infinity,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
+      child: Row(
+        // scrollDirection: Axis.horizontal,
         // crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: List.generate(8, (index) {
+        children: List.generate(7, (index) {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            padding: const EdgeInsets.symmetric(horizontal: 27.0),
             child: Column(
               children: [
-                Text(
-                  '${10 + index}:00',
-                  style: const TextStyle(color: Colors.white),
+                // Text(
+                //   '${10 + index}:00',
+                //   style: const TextStyle(color: Colors.white),
+                // ),
+
+                SizedBox(
+                  height: 20,
                 ),
                 Expanded(
                   child: CustomPaint(painter: DottedLinePainter()),
@@ -116,6 +84,110 @@ class ManageTaskPage extends StatelessWidget {
             ),
           );
         }),
+      ),
+    );
+  }
+
+  Widget _buildTask() {
+    return Container(
+      height: double.infinity, // Set a fixed height for the scrolling content
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: [
+          Row(
+            crossAxisAlignment:
+                CrossAxisAlignment.start, // Align the time and tasks at the top
+            children: [
+              // Time slots and vertical lines for each hour
+
+              // Tasks section with a Stack to overlay tasks
+              Container(
+                // width: 600, // Adjust width to allow scrolling
+                child: Stack(
+                  children: [
+                    Row(
+                      children: List.generate(24, (index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                '${1 + index}:00', // Time slots (e.g., 10:00, 11:00, etc.)
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                              // Optionally, add a vertical dotted line under each time slot
+                              Expanded(
+                                child:
+                                    CustomPaint(painter: DottedLinePainter()),
+                              )
+                            ],
+                          ),
+                        );
+                      }),
+                    ),
+                    ...List.generate(4, (index) {
+                      return Positioned(
+                        left: index * 70 + 30,
+                        top: (130 * index + 30).toDouble(),
+                        child: _buildTaskCard(
+                          title: "POS Foodie Workspace",
+                          avatarUrl: 'https://via.placeholder.com/150',
+                          duration: "00:48 h of 5 h",
+                          schedule: "4-5 June",
+                          color: const Color.fromARGB(255, 98, 176, 39),
+                        ),
+                      );
+                    }),
+                    // Positioned(
+                    //   left: 20,
+                    //   top: 20,
+                    //   child: _buildTaskCard(
+                    //     title: "POS Foodie Workspace",
+                    //     avatarUrl: 'https://via.placeholder.com/150',
+                    //     duration: "00:48 h of 5 h",
+                    //     schedule: "4-5 June",
+                    //     color: Colors.purple,
+                    //   ),
+                    // ),
+                    // Positioned(
+                    //   left: 120,
+                    //   top: 120,
+                    //   child: _buildTaskCard(
+                    //     title: "Landing page for TRIPPIES",
+                    //     avatarUrl: 'https://via.placeholder.com/150',
+                    //     duration: "00:48 h of 5 h",
+                    //     schedule: "4-5 June",
+                    //     color: Colors.green,
+                    //   ),
+                    // ),
+                    // Positioned(
+                    //   left: 20,
+                    //   top: 220,
+                    //   child: _buildTaskCard(
+                    //     title: "UNIQUO Workspace",
+                    //     avatarUrl: 'https://via.placeholder.com/150',
+                    //     duration: "00:48 h of 5 h",
+                    //     schedule: "4-5 June",
+                    //     color: Colors.orange,
+                    //   ),
+                    // ),
+                    // Positioned(
+                    //   left: 300,
+                    //   top: 320,
+                    //   child: _buildTaskCard(
+                    //     title: "UNIQUO Workspace",
+                    //     avatarUrl: 'https://via.placeholder.com/150',
+                    //     duration: "00:48 h of 5 h",
+                    //     schedule: "4-5 June",
+                    //     color: Colors.orange,
+                    //   ),
+                    // ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -129,7 +201,7 @@ class ManageTaskPage extends StatelessWidget {
     required Color color,
   }) {
     return Container(
-      width: 290,
+      width: 280,
       padding: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         color: Colors.black,
