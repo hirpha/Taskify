@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task_manager/bloc/task_bloc.dart';
+import 'package:task_manager/model/task.dart';
+
+import '../bloc/task_event.dart';
 
 class TaskListWidget extends StatelessWidget {
+  final Task task;
+
+  TaskListWidget({required this.task});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -10,18 +18,29 @@ class TaskListWidget extends StatelessWidget {
         color: Colors.grey[900],
         borderRadius: BorderRadius.circular(12),
       ),
-      child: const Column(
+      child: Column(
         children: [
           ListTile(
             title: Text(
-              'Meeting with UNIQLO',
+              task.title,
               style: TextStyle(color: Colors.white, fontSize: 18),
             ),
             subtitle: Text(
-              'Prepare meeting with them at 09:00 PM',
+              task.description,
               style: TextStyle(color: Colors.grey),
             ),
-            trailing: Icon(Icons.check_circle_outline, color: Colors.white),
+            trailing: InkWell(
+              onTap: () {
+                // uppdateTask(task);
+                task.status = !task.status;
+                BlocProvider.of<TaskBloc>(context).add(UpdateTask(task));
+              },
+              child: Icon(
+                  task.status
+                      ? Icons.check_circle_outline
+                      : Icons.circle_outlined,
+                  color: Colors.white),
+            ),
           ),
           // Add more task items as needed
         ],

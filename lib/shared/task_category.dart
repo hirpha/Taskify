@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:task_manager/bloc/task_bloc.dart';
+import 'package:task_manager/bloc/task_state.dart';
 
 class TaskCategoryWidget extends StatelessWidget {
   @override
@@ -95,45 +98,56 @@ class TaskCategoryWidget extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: const Color.fromARGB(255, 154, 154, 154)
-                          .withOpacity(.5)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Column(
-                        children: [
-                          Text(
-                            "Daily Task",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "8/10 done ",
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                        ],
-                      ),
-                      CircularPercentIndicator(
-                        radius: 25.0,
-                        lineWidth: 5.0,
-                        animation: true,
-                        percent: 0.7,
-                        center: const Text(
-                          "70.0%",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 10.0),
+                BlocBuilder<TaskBloc, TaskState>(
+                  builder: (context, state) {
+                    if (state is TaskLoaded) {
+                      return Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: const Color.fromARGB(255, 154, 154, 154)
+                                .withOpacity(.5)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              children: [
+                                Text(
+                                  "Daily Task",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  "${state.tasks.where((task) => task.status).toList().length}/${state.tasks.length} done ",
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              ],
+                            ),
+                            CircularPercentIndicator(
+                              radius: 25.0,
+                              lineWidth: 5.0,
+                              animation: true,
+                              percent: state.tasks
+                                      .where((task) => task.status)
+                                      .toList()
+                                      .length /
+                                  state.tasks.length,
+                              center: Text(
+                                "${((state.tasks.where((task) => task.status).toList().length / state.tasks.length) * 100).toStringAsFixed(2)}%",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 8.0),
+                              ),
+                              circularStrokeCap: CircularStrokeCap.round,
+                              progressColor: Colors.white,
+                            ),
+                          ],
                         ),
-                        circularStrokeCap: CircularStrokeCap.round,
-                        progressColor: Colors.white,
-                      ),
-                    ],
-                  ),
+                      );
+                    }
+                    return SizedBox();
+                  },
                 ),
               ],
             ),

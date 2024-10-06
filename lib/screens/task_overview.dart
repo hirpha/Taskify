@@ -1,11 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task_manager/bloc/task_bloc.dart';
+import 'package:task_manager/bloc/task_state.dart';
 import 'package:task_manager/shared/app_bar.dart';
 
+import '../bloc/task_event.dart';
 import '../shared/task_category.dart';
 import '../shared/task_list.dart';
 import '../shared/task_timeline_widget.dart';
 
-class TaskOverviewScreen extends StatelessWidget {
+class TaskOverviewScreen extends StatefulWidget {
+  @override
+  State<TaskOverviewScreen> createState() => _TaskOverviewScreenState();
+}
+
+class _TaskOverviewScreenState extends State<TaskOverviewScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    BlocProvider.of<TaskBloc>(context).add(LoadTasks());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,11 +92,24 @@ class TaskOverviewScreen extends StatelessWidget {
                         color: Colors.white),
                   ),
                   const SizedBox(height: 10),
-                  TaskListWidget(),
-                  TaskListWidget(),
-                  TaskListWidget(),
-                  TaskListWidget(),
-                  TaskListWidget(),
+
+                  BlocBuilder<TaskBloc, TaskState>(builder: (context, state) {
+                    if (state is TaskLoaded) {
+                      return Column(
+                        children: state.tasks
+                            .map((task) => TaskListWidget(
+                                  task: task,
+                                ))
+                            .toList(),
+                      );
+                    }
+                    return SizedBox();
+                  })
+                  // TaskListWidget(),
+                  // TaskListWidget(),
+                  // TaskListWidget(),
+                  // TaskListWidget(),
+                  // TaskListWidget(),
                 ],
               ),
             ),

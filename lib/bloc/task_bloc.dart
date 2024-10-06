@@ -10,23 +10,28 @@ import 'task_state.dart';
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
   /// {@macro task_bloc}
   ///
-  List<Task> _tasks = [];
+  List<Task> _tasks = [...sampleTasks];
   TaskBloc() : super(TaskInitial()) {
     on<LoadTasks>((event, emit) {
+      emit(TaskLoading());
       // Logic to load tasks could be here
       emit(TaskLoaded(_tasks)); // You might want to fetch tasks from a source
     });
 
     on<AddTask>((event, emit) {
+      emit(TaskLoading());
       _tasks.add(event.task);
       emit(TaskLoaded(_tasks));
     });
 
     on<UpdateTask>((event, emit) {
-      // final updatedTasks = state.map((task) {
-      //   return task.title == event.task.title ? event.task : task;
-      // }).toList();
-      // emit(updatedTasks);
+      emit(TaskLoading());
+      Task old =
+          _tasks.firstWhere((element) => element.title == event.task.title);
+      int index = _tasks.indexOf(old);
+      _tasks[index].status = event.task.status;
+
+      emit(TaskLoaded(_tasks));
     });
 
     on<DeleteTask>((event, emit) {
