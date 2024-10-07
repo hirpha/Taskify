@@ -57,6 +57,9 @@ class TaskCategoryWidget extends StatelessWidget {
                               softWrap: true,
                               style: TextStyle(
                                 fontSize: 13,
+                                decoration: TextDecoration.lineThrough,
+                                decorationStyle: TextDecorationStyle.solid,
+                                decorationColor: Colors.black,
                                 color: Colors.grey,
                               ),
                             ),
@@ -105,14 +108,14 @@ class TaskCategoryWidget extends StatelessWidget {
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: const Color.fromARGB(255, 154, 154, 154)
+                            color: Color.fromARGB(255, 103, 103, 103)
                                 .withOpacity(.5)),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Column(
                               children: [
-                                Text(
+                                const Text(
                                   "Daily Task",
                                   style: TextStyle(
                                       color: Colors.white,
@@ -121,7 +124,7 @@ class TaskCategoryWidget extends StatelessWidget {
                                 ),
                                 Text(
                                   "${state.tasks.where((task) => task.status).toList().length}/${state.tasks.length} done ",
-                                  style: TextStyle(color: Colors.grey),
+                                  style: const TextStyle(color: Colors.grey),
                                 ),
                               ],
                             ),
@@ -135,18 +138,20 @@ class TaskCategoryWidget extends StatelessWidget {
                                       .length /
                                   state.tasks.length,
                               center: Text(
-                                "${((state.tasks.where((task) => task.status).toList().length / state.tasks.length) * 100).toStringAsFixed(2)}%",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 8.0),
+                                "${((state.tasks.where((task) => task.status).toList().length / state.tasks.length) * 100).toStringAsFixed(0)}%",
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 10.0),
                               ),
                               circularStrokeCap: CircularStrokeCap.round,
                               progressColor: Colors.white,
+                              backgroundColor: Colors.black,
                             ),
                           ],
                         ),
                       );
                     }
-                    return SizedBox();
+                    return const SizedBox();
                   },
                 ),
               ],
@@ -196,7 +201,7 @@ class TaskCategoryWidget extends StatelessWidget {
                           softWrap: true,
                           style: TextStyle(
                             fontSize: 13,
-                            color: Colors.grey,
+                            color: Color.fromARGB(255, 220, 220, 220),
                           ),
                         ),
                       ),
@@ -226,7 +231,7 @@ class TaskCategoryWidget extends StatelessWidget {
                           softWrap: true,
                           style: TextStyle(
                             fontSize: 13,
-                            color: Colors.grey,
+                            color: Color.fromARGB(255, 220, 220, 220),
                           ),
                         ),
                       ),

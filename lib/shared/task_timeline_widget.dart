@@ -19,7 +19,9 @@ class TimelineWidget extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                 decoration: BoxDecoration(
-                  color: index == 1 ? Colors.orange : Colors.grey[900],
+                  color: index == 1
+                      ? Theme.of(context).primaryColor
+                      : Colors.grey[900],
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(

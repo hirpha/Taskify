@@ -10,7 +10,7 @@ import 'task_state.dart';
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
   /// {@macro task_bloc}
   ///
-  List<Task> _tasks = [...sampleTasks];
+  final List<Task> _tasks = [...sampleTasks];
   TaskBloc() : super(TaskInitial()) {
     on<LoadTasks>((event, emit) {
       emit(TaskLoading());

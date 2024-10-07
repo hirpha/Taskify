@@ -39,16 +39,17 @@ class _TaskOverviewScreenState extends State<TaskOverviewScreen> {
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                height: 50,
+                height: 60,
+                alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Colors.grey[800],
-                  borderRadius: BorderRadius.circular(12),
+                  color: Color.fromARGB(255, 31, 31, 31),
+                  borderRadius: BorderRadius.circular(49),
                 ),
                 child: const TextField(
                   decoration: InputDecoration(
                     hintText: 'Search your task...',
                     border: InputBorder.none,
-                    icon: Icon(Icons.search, color: Colors.white),
+                    icon: Icon(Icons.search, size: 30, color: Colors.grey),
                   ),
                 ),
               ),

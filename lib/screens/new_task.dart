@@ -1,4 +1,11 @@
+import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task_manager/bloc/task_bloc.dart';
+import 'package:task_manager/model/task.dart';
+
+import '../bloc/task_event.dart';
 
 class NewTask extends StatefulWidget {
   static const String routeName = "newtask";
@@ -9,9 +16,13 @@ class NewTask extends StatefulWidget {
 class _NewTaskState extends State<NewTask> {
   DateTime _dueDate = DateTime.now();
   DateTime _endDate = DateTime.now();
-  TimeOfDay _dailyTime = TimeOfDay(hour: 10, minute: 0);
-  String _selectedWorkspace = 'Select workspace';
-  List<String> workspaces = ['Workspace 1', 'Workspace 2', 'Workspace 3'];
+  TextEditingController titleEditingController = TextEditingController();
+  TextEditingController descEditingController = TextEditingController();
+  TextEditingController workspaceEditingController = TextEditingController();
+  TimeOfDay _dailyTime = const TimeOfDay(hour: 10, minute: 0);
+  List<String> workspaces = ['Personal', 'General', 'Office'];
+
+
 
   Future<void> _selectDate(BuildContext context, bool isDueDate) async {
     final DateTime? picked = await showDatePicker(
@@ -20,7 +31,7 @@ class _NewTaskState extends State<NewTask> {
       firstDate: DateTime(2020),
       lastDate: DateTime(2030),
     );
-    if (picked != null && picked != _dueDate)
+    if (picked != null && picked != _dueDate) {
       setState(() {
         if (isDueDate) {
           _dueDate = picked;
@@ -28,6 +39,7 @@ class _NewTaskState extends State<NewTask> {
           _endDate = picked;
         }
       });
+    }
   }
 
   Future<void> _selectTime(BuildContext context) async {
@@ -36,9 +48,11 @@ class _NewTaskState extends State<NewTask> {
       initialTime: _dailyTime,
     );
     if (picked != null && picked != _dailyTime)
+      // ignore: curly_braces_in_flow_control_structures
       setState(() {
         _dailyTime = picked;
       });
+    print(_dailyTime.hour);
   }
 
   @override
@@ -82,8 +96,8 @@ class _NewTaskState extends State<NewTask> {
               decoration: const BoxDecoration(
                   shape: BoxShape.circle, color: Colors.white),
               child: IconButton(
-                icon:
-                    const Icon(Icons.menu, color: Color.fromARGB(255, 0, 0, 0)),
+                icon: const Icon(Icons.more_horiz,
+                    color: Color.fromARGB(255, 0, 0, 0)),
                 onPressed: () {},
               ),
             ),
@@ -97,9 +111,10 @@ class _NewTaskState extends State<NewTask> {
           children: <Widget>[
             const CustomText(title: "Title"),
             TextField(
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
+              controller: titleEditingController,
               decoration: InputDecoration(
-                  labelStyle: TextStyle(color: Colors.white),
+                  labelStyle: const TextStyle(color: Colors.white),
                   filled: true,
                   hintText: "Please write your title here...",
                   fillColor: Colors.grey[900],
@@ -107,24 +122,23 @@ class _NewTaskState extends State<NewTask> {
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(50))),
             ),
-            SizedBox(height: 10),
-
+            const SizedBox(height: 10),
             const CustomText(title: "Description"),
             TextField(
+              controller: descEditingController,
               maxLines: 4,
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 hintText: "Please write your description here...",
                 border: OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(20)),
-                labelStyle: TextStyle(color: Colors.white),
+                labelStyle: const TextStyle(color: Colors.white),
                 filled: true,
                 fillColor: Colors.grey[900],
               ),
             ),
-            SizedBox(height: 20),
-
+            const SizedBox(height: 20),
             Row(
               children: [
                 Expanded(
@@ -135,7 +149,7 @@ class _NewTaskState extends State<NewTask> {
                       GestureDetector(
                         onTap: () => _selectDate(context, true),
                         child: Container(
-                          padding: EdgeInsets.symmetric(vertical: 15),
+                          padding: const EdgeInsets.symmetric(vertical: 15),
                           decoration: BoxDecoration(
                             color: Colors.grey[900],
                             borderRadius: BorderRadius.circular(10),
@@ -143,11 +157,12 @@ class _NewTaskState extends State<NewTask> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.calendar_today, color: Colors.white),
-                              SizedBox(width: 5),
+                              const Icon(Icons.calendar_today,
+                                  color: Colors.white),
+                              const SizedBox(width: 5),
                               Text(
                                 "${_dueDate.toLocal()}".split(' ')[0],
-                                style: TextStyle(color: Colors.white),
+                                style: const TextStyle(color: Colors.white),
                               ),
                             ],
                           ),
@@ -156,7 +171,7 @@ class _NewTaskState extends State<NewTask> {
                     ],
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -165,7 +180,7 @@ class _NewTaskState extends State<NewTask> {
                       GestureDetector(
                         onTap: () => _selectDate(context, false),
                         child: Container(
-                          padding: EdgeInsets.symmetric(vertical: 15),
+                          padding: const EdgeInsets.symmetric(vertical: 15),
                           decoration: BoxDecoration(
                             color: Colors.grey[900],
                             borderRadius: BorderRadius.circular(10),
@@ -173,11 +188,12 @@ class _NewTaskState extends State<NewTask> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.calendar_today, color: Colors.white),
-                              SizedBox(width: 5),
+                              const Icon(Icons.calendar_today,
+                                  color: Colors.white),
+                              const SizedBox(width: 5),
                               Text(
                                 "${_endDate.toLocal()}".split(' ')[0],
-                                style: TextStyle(color: Colors.white),
+                                style: const TextStyle(color: Colors.white),
                               ),
                             ],
                           ),
@@ -188,12 +204,12 @@ class _NewTaskState extends State<NewTask> {
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             const CustomText(title: "Daily Timeline Date"),
             GestureDetector(
               onTap: () => _selectTime(context),
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 15),
+                padding: const EdgeInsets.symmetric(vertical: 15),
                 decoration: BoxDecoration(
                   color: Colors.grey[900],
                   borderRadius: BorderRadius.circular(10),
@@ -201,45 +217,73 @@ class _NewTaskState extends State<NewTask> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(width: 20),
-                    Icon(Icons.access_time, color: Colors.white),
-                    SizedBox(width: 5),
+                    const SizedBox(width: 20),
+                    const Icon(Icons.access_time, color: Colors.white),
+                    const SizedBox(width: 5),
                     Text(
                       "${_dailyTime.format(context)}",
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ),
                   ],
                 ),
               ),
             ),
-            SizedBox(height: 20),
-            // DropdownButton<String>(
-            //   value: _selectedWorkspace,
-            //   dropdownColor: Colors.black,
-            //   icon: Icon(Icons.arrow_drop_down, color: Colors.white),
-            //   items: workspaces.map<DropdownMenuItem<String>>((String value) {
-            //     return DropdownMenuItem<String>(
-            //       value: value,
-            //       child: Text(value, style: TextStyle(color: Colors.white)),
-            //     );
-            //   }).toList(),
-            //   onChanged: (String? newValue) {
-            //     setState(() {
-            //       _selectedWorkspace = newValue?.toString() ?? "";
-            //     });
-            //   },
-            // ),
-            Spacer(),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.orange,
-                minimumSize: Size(double.infinity, 50),
+            const SizedBox(height: 20),
+            const CustomText(title: "Workspace"),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 10),
+              child: CustomDropdown(
+                onChanged: (p0) =>
+                    {workspaceEditingController.text = p0.toString()},
+                // controller: genderController,
+                hintText: "Select workspace",
+
+                decoration: CustomDropdownDecoration(
+                  closedFillColor: Colors.grey[900],
+                ),
+
+                validator: (p0) {
+                  // if (p0 == null) {
+                  //   return localizations!
+                  //       .translate("select_gender_error");
+                  // }
+                  // return null;
+                },
+                items: workspaces,
               ),
-              onPressed: () {
-                // Handle create task action
-              },
-              child: Text('Create'),
             ),
+            const Spacer(),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Theme.of(context).primaryColor,
+                  minimumSize: const Size(double.infinity, 60),
+                ),
+                onPressed: () {
+                  // Handle create task action
+
+                  Task newTask = Task(
+                      title: titleEditingController.text,
+                      description: descEditingController.text,
+                      dueDate: _dueDate,
+                      endDate: _endDate,
+                      dailyTime: _dailyTime,
+                      workspace: workspaceEditingController.text,
+                      order: _dailyTime.hour == 0 ? 24 : _dailyTime.hour,
+                      status: false);
+
+                  BlocProvider.of<TaskBloc>(context).add(AddTask(newTask));
+                },
+                child: const Text(
+                  'Create',
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            )
           ],
         ),
       ),
@@ -254,10 +298,10 @@ class CustomText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.symmetric(vertical: 10),
+        margin: const EdgeInsets.symmetric(vertical: 10),
         child: Text(
           title,
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ));
   }
 }

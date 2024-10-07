@@ -19,7 +19,8 @@ class TaskManagerApp extends StatelessWidget {
         title: 'Task Manager',
         theme: ThemeData(
           brightness: Brightness.dark,
-          primarySwatch: Colors.orange,
+          primarySwatch: Colors.deepOrange,
+          primaryColor: Colors.deepOrange,
           fontFamily: 'GoogleFonts.poppins().fontFamily',
         ),
         onGenerateRoute: (settings) {
