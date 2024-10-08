@@ -67,7 +67,7 @@ class _TaskOverviewScreenState extends State<TaskOverviewScreen> {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   Row(
-                    children: [Text("June"), Icon(Icons.arrow_drop_down)],
+                    children: [Text("October"), Icon(Icons.arrow_drop_down)],
                   )
                 ],
               ),

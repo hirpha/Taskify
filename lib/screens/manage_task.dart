@@ -91,7 +91,7 @@ class _ManageTaskPageState extends State<ManageTaskPage> {
           SizedBox(
             height: 20,
           ),
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(left: 20.0),
             child: Align(
               alignment: Alignment.centerLeft,
@@ -101,7 +101,7 @@ class _ManageTaskPageState extends State<ManageTaskPage> {
                   Row(
                     children: [
                       Text(
-                        '04 June 2023',
+                        '04 October 2023',
                         style: TextStyle(
                             fontSize: 24,
                             color: Colors.white,
@@ -111,7 +111,7 @@ class _ManageTaskPageState extends State<ManageTaskPage> {
                     ],
                   ),
                   Text(
-                    'You have total 4 tasks',
+                    'You have total ${_tasks.length} tasks',
                     style: TextStyle(
                       fontSize: 16,
                       color: Color.fromARGB(255, 158, 158, 158),
@@ -281,7 +281,7 @@ class _ManageTaskPageState extends State<ManageTaskPage> {
                     //       avatarUrl:
                     //           'https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
                     //       duration: "00:48 h of 5 h",
-                    //       schedule: "4-5 June",
+                    //       schedule: "4-5 October",
                     //       color: index % 2 == 0
                     //           ? Colors.red
                     //           : const Color.fromARGB(255, 98, 176, 39),
@@ -295,7 +295,7 @@ class _ManageTaskPageState extends State<ManageTaskPage> {
                     //     title: "POS Foodie Workspace",
                     //     avatarUrl: 'https://via.placeholder.com/150',
                     //     duration: "00:48 h of 5 h",
-                    //     schedule: "4-5 June",
+                    //     schedule: "4-5 October",
                     //     color: Colors.purple,
                     //   ),
                     // ),
@@ -306,7 +306,7 @@ class _ManageTaskPageState extends State<ManageTaskPage> {
                     //     title: "Landing page for TRIPPIES",
                     //     avatarUrl: 'https://via.placeholder.com/150',
                     //     duration: "00:48 h of 5 h",
-                    //     schedule: "4-5 June",
+                    //     schedule: "4-5 October",
                     //     color: Colors.green,
                     //   ),
                     // ),
@@ -317,7 +317,7 @@ class _ManageTaskPageState extends State<ManageTaskPage> {
                     //     title: "UNIQUO Workspace",
                     //     avatarUrl: 'https://via.placeholder.com/150',
                     //     duration: "00:48 h of 5 h",
-                    //     schedule: "4-5 June",
+                    //     schedule: "4-5 October",
                     //     color: Colors.orange,
                     //   ),
                     // ),
@@ -328,7 +328,7 @@ class _ManageTaskPageState extends State<ManageTaskPage> {
                     //     title: "UNIQUO Workspace",
                     //     avatarUrl: 'https://via.placeholder.com/150',
                     //     duration: "00:48 h of 5 h",
-                    //     schedule: "4-5 June",
+                    //     schedule: "4-5 October",
                     //     color: Colors.orange,
                     //   ),
                     // ),

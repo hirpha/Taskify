@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager/screens/manage_task.dart';
+import 'package:task_manager/screens/new_task.dart';
 import 'package:task_manager/screens/task_overview.dart';
 
 class TaskManagerHome extends StatefulWidget {
@@ -14,12 +15,16 @@ class _TaskManagerHomeState extends State<TaskManagerHome> {
     TaskOverviewScreen(),
     ManageTaskPage(), // This is the page you'll link to the calendar
     TaskOverviewScreen(), // This is the page you'll link to the calendar
+    TaskOverviewScreen(), // This is the page you'll link to the calendar
+    TaskOverviewScreen(), // This is the page you'll link to the calendar
     // Add other pages here
   ];
 
   void _onItemTapped(int index) {
     if (index == 1) {
       Navigator.pushNamed(context, ManageTaskPage.routeName);
+    } else if (index == 2) {
+      Navigator.pushNamed(context, NewTask.routeName);
     } else {
       setState(() {
         _selectedIndex = index;
@@ -31,7 +36,9 @@ class _TaskManagerHomeState extends State<TaskManagerHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pages[_selectedIndex],
+
       bottomNavigationBar: BottomNavigationBar(
+      
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -41,9 +48,13 @@ class _TaskManagerHomeState extends State<TaskManagerHome> {
             icon: Icon(Icons.calendar_today),
             label: 'Calendar',
           ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.settings),
+          //   label: 'Settings',
+          // ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+            icon: Icon(Icons.add),
+            label: 'Add Task',
           ),
           // Add other navigation items here
         ],

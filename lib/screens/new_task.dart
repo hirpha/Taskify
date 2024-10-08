@@ -4,11 +4,18 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manager/bloc/task_bloc.dart';
 import 'package:task_manager/model/task.dart';
+import 'package:task_manager/screens/success_dialog.dart';
 
 import '../bloc/task_event.dart';
 
+enum Workspaces { personal, general, office }
+
+// = ['Personal', 'General', 'Office'];
+
 class NewTask extends StatefulWidget {
   static const String routeName = "newtask";
+
+  const NewTask({super.key});
   @override
   _NewTaskState createState() => _NewTaskState();
 }
@@ -21,8 +28,6 @@ class _NewTaskState extends State<NewTask> {
   TextEditingController workspaceEditingController = TextEditingController();
   TimeOfDay _dailyTime = const TimeOfDay(hour: 10, minute: 0);
   List<String> workspaces = ['Personal', 'General', 'Office'];
-
-
 
   Future<void> _selectDate(BuildContext context, bool isDueDate) async {
     final DateTime? picked = await showDatePicker(
@@ -240,6 +245,7 @@ class _NewTaskState extends State<NewTask> {
 
                 decoration: CustomDropdownDecoration(
                   closedFillColor: Colors.grey[900],
+                  expandedFillColor: const Color.fromARGB(255, 0, 0, 0),
                 ),
 
                 validator: (p0) {
@@ -260,7 +266,7 @@ class _NewTaskState extends State<NewTask> {
                   backgroundColor: Theme.of(context).primaryColor,
                   minimumSize: const Size(double.infinity, 60),
                 ),
-                onPressed: () {
+                onPressed: () async {
                   // Handle create task action
 
                   Task newTask = Task(
@@ -274,6 +280,15 @@ class _NewTaskState extends State<NewTask> {
                       status: false);
 
                   BlocProvider.of<TaskBloc>(context).add(AddTask(newTask));
+                  await Future.delayed(const Duration(seconds: 1));
+                  showDialog(
+                    context: context,
+                    builder: (context) => const SuccessDialog(
+                      desc: 'Your task has been added successfully.',
+                      title: "Success",
+                      isPopTwo: true,
+                    ),
+                  );
                 },
                 child: const Text(
                   'Create',
